@@ -67,3 +67,7 @@ def MeasurementsCreate(request):
         Measurement.objects.bulk_create(measurement_list)
         return HttpResponse("successfully created measurements")
     
+def MeasurementsDelete(request):
+    if request.method == 'DELETE':
+        Measurement.objects.all().delete()
+        return HttpResponse("successfully deleted measurements")
