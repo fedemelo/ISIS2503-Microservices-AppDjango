@@ -1,6 +1,6 @@
 from django.db import models
 
-class Variable(models.Model):
+class Place(models.Model):
     name = models.CharField(max_length=50)
 
     def __str__(self):
