@@ -33,7 +33,9 @@ def MeasurementCreate(request):
     if request.method == 'POST':
         data = request.body.decode('utf-8')
         data_json = json.loads(data)
-        if check_variable(data_json) == True:
+        # Se valida que el lugar exista!
+        place_exists = check_place(measurement) 
+        if check_variable(data_json) == True and place_exists:
             measurement = Measurement()
             measurement.variable = data_json['variable']
             measurement.value = data_json['value']
@@ -42,7 +44,7 @@ def MeasurementCreate(request):
             measurement.save()
             return HttpResponse("successfully created measurement")
         else:
-            return HttpResponse("unsuccessfully created measurement. Variable does not exist")
+            return HttpResponse("unsuccessfully created measurement. Variable or Place does not exist")
 
 def MeasurementsCreate(request):
     if request.method == 'POST':
@@ -64,5 +66,4 @@ def MeasurementsCreate(request):
         
         Measurement.objects.bulk_create(measurement_list)
         return HttpResponse("successfully created measurements")
-    
     
