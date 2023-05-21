@@ -34,7 +34,7 @@ def MeasurementCreate(request):
         data = request.body.decode('utf-8')
         data_json = json.loads(data)
         # Se valida que el lugar exista!
-        place_exists = check_place(measurement) 
+        place_exists = check_place(data_json)
         if check_variable(data_json) == True and place_exists:
             measurement = Measurement()
             measurement.variable = data_json['variable']
